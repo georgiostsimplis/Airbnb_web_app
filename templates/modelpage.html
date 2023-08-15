@@ -107,7 +107,7 @@
                 
                 <script>
                     const inputElementcity = document.getElementById("city");
-                    const capacityListcity = document.getElementById("city-list").children;
+                    const capacityListcity = document.getElementById("city_list").children;
                     
                     inputElementcity.addEventListener("input", function () {
                         const enteredValue = inputElementcity.value.trim();
@@ -148,8 +148,8 @@
 
                 <div class="input-group">
                     <label for="person_capacity">Person Capacity:</label>
-                    <input type="text" id="person_capacity" name="person_capacity" placeholder="Enter a value between 2-6" list="capacity-list" autocomplete="off" required="">
-                    <datalist id="capacity-list">
+                    <input type="text" id="person_capacity" name="person_capacity" placeholder="Enter a value between 2-6" list="capacity_list" autocomplete="off" required="">
+                    <datalist id="capacity_list">
                         <option value="2"></option>
                         <option value="3"></option>
                         <option value="4"></option>
@@ -160,19 +160,19 @@
                 
                 <script>
                     const inputElement = document.getElementById("person_capacity");
-                    const capacityList = document.getElementById("capacity-list").children;
-                    
+                    const capacityOptions = document.getElementById("capacity_list").querySelectorAll("option");
+                
                     inputElement.addEventListener("input", function () {
                         const enteredValue = inputElement.value.trim();
                         let isValid = false;
-                        
-                        for (let i = 0; i < capacityList.length; i++) {
-                            if (capacityList[i].value === enteredValue) {
+                
+                        for (let i = 0; i < capacityOptions.length; i++) {
+                            if (capacityOptions[i].value === enteredValue) {
                                 isValid = true;
                                 break;
                             }
                         }
-                        
+                
                         if (!isValid) {
                             inputElement.value = "";
                             alert("Please enter a number between 2 and 6");
@@ -181,10 +181,11 @@
                 </script>
                 
                 
+                
                 <div class="input-group">
                     <label for="Multiple_Rooms">Multiple Rooms:</label>
-                    <input type="number" id="Multiple_Rooms" name="Multiple_Rooms" list="Multiple_Rooms-list" autocomplete="off" required="">
-                    <datalist id="Multiple_Rooms-list">
+                    <input type="number" id="Multiple_Rooms" name="Multiple_Rooms" list="Multiple_Rooms_list" autocomplete="off" required="">
+                    <datalist id="Multiple_Rooms_list">
                         <option value="1"></option>
                         <option value="0"></option>
                     </datalist>
@@ -193,8 +194,8 @@
 
                 <div class="input-group">
                     <label for="bussiness">Bussiness:</label>
-                    <input type="number" id="bussiness" name="bussiness" list="bussiness-list" autocomplete="off" required="">
-                    <datalist id="bussiness-list">
+                    <input type="number" id="bussiness" name="bussiness" list="bussiness_list" autocomplete="off" required="">
+                    <datalist id="bussiness_list">
                         <option value="1"></option>
                         <option value="0"></option>
                     </datalist>
@@ -261,8 +262,8 @@
 
                 <div class="input-group">
                     <label for="Bedrooms">Bedrooms:</label>
-                    <input type="number" id="Bedrooms" name="Bedrooms" list="Bedrooms-list" autocomplete="off" placeholder="Enter a value between 0-10" min="0" max="10" oninput="validateInput010(this)" required="">
-                    <datalist id="Bedrooms-list">
+                    <input type="number" id="Bedrooms" name="Bedrooms" list="Bedrooms_list" autocomplete="off" placeholder="Enter a value between 0-10" min="0" max="10" oninput="validateInput010(this)" required="">
+                    <datalist id="Bedrooms_list">
                         <option value="0"></option>
                         <option value="1"></option>
                         <option value="2"></option>
