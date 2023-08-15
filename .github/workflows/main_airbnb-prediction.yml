@@ -30,8 +30,9 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
         
-      # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
-      
+      - name: Fetch Git LFS objects
+        run: git lfs fetch --all
+        
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v2
         with:
@@ -54,9 +55,9 @@ jobs:
           name: python-app
           path: .
       
-      - name: Checkout LFS files
+      - name: Pull Git LFS objects
         run: git lfs pull
-          
+      
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
         id: deploy-to-webapp
