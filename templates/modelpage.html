@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<!-- saved from url=(0076)file:///C:/Users/george/Desktop/Ex_files/airbnb_app/templates/modelpage.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>SVG Image and Input Example</title>
+    <style>
+        body {
+            background-color: #333;
+            color: #f63939; /* Set text color to #f63939 */
+            font-weight: bold;
+        }
+        .container {
+            display: flex;
+        }
+        .svg-container {
+            flex: 1;
+        }
+        .input-container {
+            flex: 1;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .input-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .input-group label {
+            width: 120px;
+            margin-right: 10px;
+        }
+        .input-group input {
+            flex: 1;
+        }
+        .app-button a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #f63939;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .top-container {
+            position: relative;
+            height: 240px; /* Fixed height of the container */
+            width: 100%;
+            overflow: hidden;
+        }
+        .top-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .bigger-title {
+            text-align: center;
+            font-size: 36px;
+            color: #f63939; /* Set desired text color */
+            margin-bottom: 10px; /* Add margin at the bottom */
+        }
+    </style>
+    
+    <script src="./SVG Image and Input Example_files/plotly-latest.min.js.download"></script><style id="plotly.js-style-global"></style>
+
+
+
+</head>
+<body>
+
+    <div class="bigger-title">European Airbnb Calculator</div>
+
+    <!-- <div class="top-container">
+        <img class="top-image" src="../static/robbon.png" alt="Top Image">
+    
+    </div> -->
+
+    <div class="container">
+        <!-- <div class="svg-container">
+            <img src="../static/plot.svg" alt="Plot Image" width="500" height="400">
+        </div> -->
+
+        <iframe src="../static/airbnb_plot.html" width="650" height="550" frameborder="0"></iframe>
+        
+        
+        <div class="input-container">
+            <h2>Enter Values</h2>
+            <form action="{{ url_for('predict_datapoint')}}" method="POST">
+
+
+                <div class="input-group">
+                    <label for="city">City:</label>
+                    <input type="text" id="city" name="city" list="city_list" autocomplete="off" required="">
+                    <datalist id="city_list">
+                        <option value="Amsterdam"></option>
+                        <option value="Athens"></option>
+                        <option value="Barcelona"></option>
+                        <option value="Berlin"></option>
+                        <option value="Budapest"></option>
+                        <option value="Lisbon"></option>
+                        <option value="Paris"></option>
+                        <option value="Rome"></option>
+                        <option value="Vienna"></option>
+                        <!-- Add more city options as needed -->
+                    </datalist>
+                </div>
+                
+                <script>
+                    const inputElementcity = document.getElementById("city");
+                    const capacityListcity = document.getElementById("city-list").children;
+                    
+                    inputElementcity.addEventListener("input", function () {
+                        const enteredValue = inputElementcity.value.trim();
+                        let isValid = false;
+                        
+                        for (let i = 0; i < capacityListcity.length; i++) {
+                            if (capacityListcity[i].value === enteredValue) {
+                                isValid = true;
+                                break;
+                            }
+                        }
+                        
+                        if (!isValid) {
+                            inputElementcity.value = "";
+                            alert("Please enter one of the available choices");
+                        }
+                    });
+                </script>
+                
+                
+                
+                
+                
+                
+                
+
+
+                <div class="input-group">
+                    <label for="Room_Type">Room Type:</label>
+                    <input type="text" id="Room_Type" name="Room_Type" list="Room_Type-list" required="">
+                    <datalist id="Room_Type-list">
+                        <option value="Entire home/apt"></option>
+                        <option value="Private room"></option>
+                        <option value="Shared room"></option>
+                        <!-- Add more city options as needed -->
+                    </datalist>
+                </div>
+
+                <div class="input-group">
+                    <label for="person_capacity">Person Capacity:</label>
+                    <input type="text" id="person_capacity" name="person_capacity" placeholder="Enter a value between 2-6" list="capacity-list" autocomplete="off" required="">
+                    <datalist id="capacity-list">
+                        <option value="2"></option>
+                        <option value="3"></option>
+                        <option value="4"></option>
+                        <option value="5"></option>
+                        <option value="6"></option>
+                    </datalist>
+                </div>
+                
+                <script>
+                    const inputElement = document.getElementById("person_capacity");
+                    const capacityList = document.getElementById("capacity-list").children;
+                    
+                    inputElement.addEventListener("input", function () {
+                        const enteredValue = inputElement.value.trim();
+                        let isValid = false;
+                        
+                        for (let i = 0; i < capacityList.length; i++) {
+                            if (capacityList[i].value === enteredValue) {
+                                isValid = true;
+                                break;
+                            }
+                        }
+                        
+                        if (!isValid) {
+                            inputElement.value = "";
+                            alert("Please enter a number between 2 and 6");
+                        }
+                    });
+                </script>
+                
+                
+                <div class="input-group">
+                    <label for="Multiple_Rooms">Multiple Rooms:</label>
+                    <input type="number" id="Multiple_Rooms" name="Multiple_Rooms" list="Multiple_Rooms-list" autocomplete="off" required="">
+                    <datalist id="Multiple_Rooms-list">
+                        <option value="1"></option>
+                        <option value="0"></option>
+                    </datalist>
+                </div>
+                
+
+                <div class="input-group">
+                    <label for="bussiness">Bussiness:</label>
+                    <input type="number" id="bussiness" name="bussiness" list="bussiness-list" autocomplete="off" required="">
+                    <datalist id="bussiness-list">
+                        <option value="1"></option>
+                        <option value="0"></option>
+                    </datalist>
+                </div>
+
+
+
+
+                <div class="input-group">
+                    <label for="Cleanliness_Rating">Cleanliness Rating:</label>
+                    <input type="text" id="Cleanliness_Rating" name="Cleanliness_Rating" list="Cleanliness_Rating_list" placeholder="Enter a value between 2-10" min="2" max="10" oninput="validateInput210(this)" autocomplete="off" required="">
+                    <datalist id="Cleanliness_Rating_list">
+                        <option value="2"></option>
+                        <option value="3"></option>
+                        <option value="4"></option>
+                        <option value="5"></option>
+                        <option value="6"></option>
+                        <option value="7"></option>
+                        <option value="8"></option>
+                        <option value="9"></option>
+                        <option value="10"></option>
+                    </datalist>
+                </div>
+
+                <script>
+                    function validateInput210(inputElement) {
+                        const value = inputElement.value;
+                        if (value !== '' && (value < 2 || value > 10)) {
+                            inputElement.value = '';
+                            inputElement.focus();
+                        }
+                    }
+                </script>
+
+                <!-- <div class="input-group">
+                    <label for="GuestSatisfaction">Guest Satisfaction:</label>
+                    <input type="number" id="GuestSatisfaction" name="Guest_Satisfaction"
+                        placeholder="Enter a value between 20 and 100"
+                        min="20" max="100" step="1" autocomplete="off"
+                        oninput="validateInput111(this)">
+                </div> -->
+
+                <div class="input-group">
+                    <label for="GuestSatisfaction">Guest Satisfaction:</label>
+                    <input type="number" id="GuestSatisfaction" name="Guest_Satisfaction" placeholder="Enter a value between 20 and 100" min="20" max="100" step="1" autocomplete="off" required="">
+                </div>
+                
+                <script>
+                    const inputElement11 = document.getElementById("GuestSatisfaction");
+                
+                    inputElement11.addEventListener("blur", function () {
+                        const value = parseFloat(inputElement11.value);
+                
+                        if (!Number.isInteger(value) || value < 20 || value > 100) {
+                            inputElement11.value = '';
+                        }
+                    });
+                </script>
+                
+
+
+            
+
+
+                <div class="input-group">
+                    <label for="Bedrooms">Bedrooms:</label>
+                    <input type="number" id="Bedrooms" name="Bedrooms" list="Bedrooms-list" autocomplete="off" placeholder="Enter a value between 0-10" min="0" max="10" oninput="validateInput010(this)" required="">
+                    <datalist id="Bedrooms-list">
+                        <option value="0"></option>
+                        <option value="1"></option>
+                        <option value="2"></option>
+                        <option value="3"></option>
+                        <option value="4"></option>
+                        <option value="5"></option>
+                        <option value="6"></option>
+                        <option value="7"></option>
+                        <option value="8"></option>
+                        <option value="9"></option>
+                        <option value="10"></option>
+                    </datalist>
+                </div>
+
+                <script>
+                    function validateInput010(inputElement) {
+                        const value = inputElement.value;
+                        if (value !== '' && (value < 0 || value > 10)) {
+                            inputElement.value = '';
+                            inputElement.focus();
+                        }
+                    }
+                </script>
+
+                <div class="input-group">
+                    <label for="City_Center (km)">City Center (km):</label>
+                    <input type="number" id="City_Center_(km)" name="City_Center_(km)" placeholder="Enter a value between 0 and 25" min="0" max="25" step="any" oninput="validateInput1(this)" autocomplete="off" required="">
+                </div>
+
+                <script>
+                    function validateInput1(inputElement) {
+                        const value = inputElement.value;
+                        if (value !== '' && (value < 0 || value > 25)) {
+                            inputElement.value = '';
+                            inputElement.focus();
+                        }
+                    }
+                </script>
+
+
+
+                <div class="input-group">
+                    <label for="Metro_Distance_(km)">Metro Distance (km):</label>
+                    <input type="number" id="Metro_Distance_(km)" name="Metro_Distance_(km)" placeholder="Enter a value between 0 and 14" min="0" max="14" step="any" oninput="validateInput2(this)" autocomplete="off" required="">
+                </div>
+
+                <script>
+                    function validateInput2(inputElement) {
+                        const value = inputElement.value;
+                        if (value !== '' && (value < 0 || value > 14)) {
+                            inputElement.value = '';
+                            inputElement.focus();
+                        }
+                    }
+                </script>
+
+
+
+
+                
+                
+
+                <!-- Add more input groups as needed -->
+                <div class="mb-3">
+                    <input class="btn btn-primary" type="submit" value="Submit" required="">
+                </div>
+                <br>
+                
+            </form>
+        </div>
+    </div>
+    <h2>
+        The estimated price is :{{results}} €
+    </h2>
+
+
+
+</body></html>
